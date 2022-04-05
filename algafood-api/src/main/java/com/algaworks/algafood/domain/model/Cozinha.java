@@ -10,9 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
-import com.algaworks.algafood.core.validation.Groups.CozinhaId;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,7 +19,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 public class Cozinha {
 
-	@NotNull(groups = CozinhaId.class)
+//	@NotNull(groups = CozinhaId.class)
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
