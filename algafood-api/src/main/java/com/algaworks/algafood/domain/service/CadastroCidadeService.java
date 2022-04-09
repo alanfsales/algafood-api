@@ -18,7 +18,7 @@ public class CadastroCidadeService {
 	private static final String MSG_CIDADE_EM_USO = "Cidade de codigo %d não pode ser removida, pois está em uso";
 
 	@Autowired 
-	private CidadeRespository cidadeRespository;
+	private CidadeRespository cidadeRepository;
 	
 	@Autowired
 	private CadastroEstadoService cadastroEstado;
@@ -31,14 +31,14 @@ public class CadastroCidadeService {
 				
 		cidade.setEstado(estado);
 		
-		return cidadeRespository.save(cidade);
+		return cidadeRepository.save(cidade);
 	}
 	
 	@Transactional
 	public void excluir(Long cidadeId) {
 		try {
-			cidadeRespository.deleteById(cidadeId);
-			
+			cidadeRepository.deleteById(cidadeId);
+			cidadeRepository.flush();
 		} catch (EmptyResultDataAccessException e) {
 			throw new CidadeNaoEncontradaException(cidadeId);
 			
@@ -49,6 +49,6 @@ public class CadastroCidadeService {
 	}
 	
 	public Cidade buscarOuFalhar(Long cidadeId) {
-		return cidadeRespository.findById(cidadeId).orElseThrow(() -> new CidadeNaoEncontradaException(cidadeId));
+		return cidadeRepository.findById(cidadeId).orElseThrow(() -> new CidadeNaoEncontradaException(cidadeId));
 	}
 }
