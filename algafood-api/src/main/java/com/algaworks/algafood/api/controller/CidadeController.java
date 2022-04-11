@@ -23,7 +23,7 @@ import com.algaworks.algafood.api.model.input.CidadeInput;
 import com.algaworks.algafood.domain.exception.EstadoNaoEncontradoException;
 import com.algaworks.algafood.domain.exception.NegocioException;
 import com.algaworks.algafood.domain.model.Cidade;
-import com.algaworks.algafood.domain.repository.CidadeRespository;
+import com.algaworks.algafood.domain.repository.CidadeRepository;
 import com.algaworks.algafood.domain.service.CadastroCidadeService;
 
 @RestController
@@ -31,7 +31,7 @@ import com.algaworks.algafood.domain.service.CadastroCidadeService;
 public class CidadeController {
 
 	@Autowired
-	private CidadeRespository cidadeRepository;
+	private CidadeRepository cidadeRepository;
 	
 	@Autowired
 	private CadastroCidadeService cadastroCidade;

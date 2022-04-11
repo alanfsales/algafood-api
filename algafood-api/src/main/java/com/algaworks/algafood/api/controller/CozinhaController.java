@@ -36,7 +36,6 @@ public class CozinhaController {
 	
 	@Autowired
 	private CozinhaModelAssembler cozinhaModelAssembler;
-	
 
 	@Autowired
 	private CozinhaInputDisassembler cozinhaInputDisassembler;
@@ -59,6 +58,7 @@ public class CozinhaController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public CozinhaModel adicionar(@RequestBody @Valid CozinhaInput cozinhaInput) {
 		 Cozinha cozinha = cozinhaInputDisassembler.toDomainObject(cozinhaInput);
+		 
 		 cozinha = cadastroCozinha.salvar(cozinha);
 
 		 return cozinhaModelAssembler.toModel(cozinha);
@@ -67,7 +67,9 @@ public class CozinhaController {
 	@PutMapping("/{cozinhaId}")
 	public CozinhaModel atualizar(@PathVariable Long cozinhaId, @RequestBody @Valid CozinhaInput cozinhaInput) {
 		Cozinha cozinhaAtual = cadastroCozinha.buscarOuFalhar(cozinhaId);
+		
 	    cozinhaInputDisassembler.copyToDomainObject(cozinhaInput, cozinhaAtual);
+	    
 	    cozinhaAtual = cadastroCozinha.salvar(cozinhaAtual);
 	    
 	    return cozinhaModelAssembler.toModel(cozinhaAtual);
