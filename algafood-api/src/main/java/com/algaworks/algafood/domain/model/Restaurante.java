@@ -44,7 +44,7 @@ public class Restaurante {
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 
-	@ManyToOne//(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
 	
@@ -63,7 +63,7 @@ public class Restaurante {
 	@Column(nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime dataAtualizacao;
 	
-	@ManyToMany//(fetch = FetchType.EAGER)
+	@ManyToMany
 	@JoinTable(name = "restaurante_forma_pagamento",
 			joinColumns = @JoinColumn(name = "restaurante_id"),
 			inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
@@ -71,6 +71,12 @@ public class Restaurante {
 	
 	@OneToMany(mappedBy = "restaurante")
 	private List<Produto> produtos = new ArrayList<>();
+	
+	@ManyToMany
+	@JoinTable(name = "restaurante_usuario_responsavel", 
+			joinColumns = @JoinColumn(name="restaurante_id"),
+			inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+	private Set<Usuario> responsaveis = new HashSet<>();
 	
 	public void ativar() {
 		setAtivo(true);
@@ -94,5 +100,21 @@ public class Restaurante {
 	
 	public void abrir() {
 		setAberto(true);
+	}
+	
+	public boolean removerResponsavel(Usuario usuario) {
+		return getResponsaveis().remove(usuario);
+	}
+	
+	public boolean adicionarResponsavel(Usuario usuario) {
+		return getResponsaveis().add(usuario);
+	}
+	
+	public boolean aceitaFormaPagamento(FormaPagamento formaPagamento) {
+	    return getFormasPagamento().contains(formaPagamento);
+	}
+
+	public boolean naoAceitaFormaPagamento(FormaPagamento formaPagamento) {
+	    return !aceitaFormaPagamento(formaPagamento);
 	}
 }
