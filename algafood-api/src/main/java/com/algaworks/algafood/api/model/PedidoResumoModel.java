@@ -8,6 +8,7 @@ import com.algaworks.algafood.domain.model.StatusPedido;
 import lombok.Getter;
 import lombok.Setter;
 
+//@JsonFilter("pedidoFilter")
 @Getter
 @Setter
 public class PedidoResumoModel {
@@ -19,5 +20,6 @@ public class PedidoResumoModel {
 	private StatusPedido status;
 	private OffsetDateTime dataCriacao;
 	private RestauranteResumoModel restaurante;
-	private UsuarioModel cliente;
+//	private UsuarioModel cliente;
+	private String nomeCliente;
 }
