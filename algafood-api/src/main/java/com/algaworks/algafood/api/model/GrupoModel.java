@@ -1,12 +1,14 @@
 package com.algaworks.algafood.api.model;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class GrupoModel {
+public class GrupoModel extends RepresentationModel<GrupoModel> {
 
 	@ApiModelProperty(example = "1")
 	private Long id;

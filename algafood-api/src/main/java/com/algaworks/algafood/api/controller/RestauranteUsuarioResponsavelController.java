@@ -1,8 +1,7 @@
 package com.algaworks.algafood.api.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.algaworks.algafood.api.AlgaLinks;
 import com.algaworks.algafood.api.assembler.UsuarioModelAssembler;
 import com.algaworks.algafood.api.model.UsuarioModel;
 import com.algaworks.algafood.api.openapi.controller.RestauranteUsuarioResponsavelControllerOpenApi;
@@ -29,11 +29,16 @@ public class RestauranteUsuarioResponsavelController implements RestauranteUsuar
 	@Autowired
 	private UsuarioModelAssembler usuarioModelAssembler;
 	
+	@Autowired
+	private AlgaLinks algaLinks;
+	
 	@GetMapping
-	public List<UsuarioModel> listar(@PathVariable Long restauranteId){
+	public CollectionModel<UsuarioModel> listar(@PathVariable Long restauranteId){
 		Restaurante restaurante = cadastroRestaurante.buscarOuFalhar(restauranteId);
 		
-		return usuarioModelAssembler.toCollectionModel(restaurante.getResponsaveis());
+		return usuarioModelAssembler.toCollectionModel(restaurante.getResponsaveis())
+				.removeLinks()
+				.add(algaLinks.linkToResponsaveisRestaurante(restauranteId));
 	}
 	
 	@PutMapping("/{usuarioId}")
