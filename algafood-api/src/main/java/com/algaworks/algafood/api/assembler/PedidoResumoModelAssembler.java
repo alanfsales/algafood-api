@@ -29,7 +29,7 @@ public class PedidoResumoModelAssembler
 		PedidoResumoModel pedidoResumoModel = createModelWithId(pedido.getCodigo(), pedido);
 		modelMapper.map(pedido, pedidoResumoModel);
 		
-		pedidoResumoModel.add(algaLinks.linkToPedidos());
+		pedidoResumoModel.add(algaLinks.linkToPedidos("pedidos"));
 		
 		pedidoResumoModel.getRestaurante().add(
 				algaLinks.linkToRestaurante(pedido.getRestaurante().getId()));
