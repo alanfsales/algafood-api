@@ -14,6 +14,7 @@ import org.springframework.hateoas.TemplateVariable.VariableType;
 import com.algaworks.algafood.api.controller.CidadeController;
 import com.algaworks.algafood.api.controller.CozinhaController;
 import com.algaworks.algafood.api.controller.EstadoController;
+import com.algaworks.algafood.api.controller.EstatisticasController;
 import com.algaworks.algafood.api.controller.FluxoPedidoController;
 import com.algaworks.algafood.api.controller.FormaPagamentoController;
 import com.algaworks.algafood.api.controller.GrupoController;
@@ -304,5 +305,23 @@ public class AlgaLinks {
 	
 	public Link linkToCozinhas() {
 		return linkToCozinhas(IanaLinkRelations.SELF.value());
+	}
+	
+	public Link linkToEstatisticas(String rel) {
+		return linkTo(EstatisticasController.class).withRel(rel);
+	}
+	
+	public Link linkToEstatisticasVendasDiarias(String rel) {
+		TemplateVariables filtroVariables = new TemplateVariables(
+				new TemplateVariable("restauranteId", VariableType.REQUEST_PARAM),
+				new TemplateVariable("dataCriacaoInicio", VariableType.REQUEST_PARAM),
+				new TemplateVariable("dataCriacaoFim", VariableType.REQUEST_PARAM),
+				new TemplateVariable("timeOfsete", VariableType.REQUEST_PARAM)
+		);
+		
+		String pedidoUrl = linkTo(methodOn(EstatisticasController.class)
+				.consultarVendasDisarias(null, null)).toUri().toString();
+		
+		return (Link.of(UriTemplate.of(pedidoUrl, filtroVariables), rel));
 	}
 }
