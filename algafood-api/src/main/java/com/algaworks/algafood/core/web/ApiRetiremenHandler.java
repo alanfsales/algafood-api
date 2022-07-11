@@ -3,7 +3,6 @@ package com.algaworks.algafood.core.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -20,10 +19,10 @@ public class ApiRetiremenHandler implements HandlerInterceptor{
 //							+ "Use a versão mais atual da API.");
 //		}
 		
-		if(request.getRequestURI().startsWith("/v1/")) {
-			response.setStatus(HttpStatus.GONE.value());
-			return false;
-		}
+//		if(request.getRequestURI().startsWith("/v1/")) {
+//			response.setStatus(HttpStatus.GONE.value());
+//			return false;
+//		}
 		return true;
 	}
 }
