@@ -6,6 +6,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.TemplateVariable;
+import org.springframework.hateoas.TemplateVariable.VariableType;
 import org.springframework.hateoas.TemplateVariables;
 import org.springframework.hateoas.UriTemplate;
 import org.springframework.stereotype.Component;
@@ -27,8 +28,6 @@ import com.algaworks.algafood.api.v1.controller.RestauranteProdutoFotoController
 import com.algaworks.algafood.api.v1.controller.RestauranteUsuarioResponsavelController;
 import com.algaworks.algafood.api.v1.controller.UsuarioController;
 import com.algaworks.algafood.api.v1.controller.UsuarioGrupoController;
-
-import org.springframework.hateoas.TemplateVariable.VariableType;
 
 @Component
 public class AlgaLinks {
