@@ -80,7 +80,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
 	@PutMapping("/{usuarioId}/senha")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizarSenha(@PathVariable Long usuarioId, @RequestBody @Valid SenhaInput senha) {
-		cadastroUsuario.atualizarSenha(usuarioId, senha.getSenhaAtual(), senha.getNovaSenha());
+		cadastroUsuario.alterarSenha(usuarioId, senha.getSenhaAtual(), senha.getNovaSenha());
 	}
 	
 }
