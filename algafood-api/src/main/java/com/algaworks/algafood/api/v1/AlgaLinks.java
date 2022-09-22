@@ -195,21 +195,21 @@ public class AlgaLinks {
 		return linkToPermissoes(IanaLinkRelations.SELF.value());
 	}
 	
-	public Link linkToGrupoPermissaoAsossiacao(Long grupoId, String rel) {
+	public Link linkToGrupoPermissaoAssociacao(Long grupoId, String rel) {
 		return linkTo(methodOn(GrupoPermissaoController.class).associar(grupoId, null)).withRel(rel);
 	}
 	
-	public Link linkToGrupoPermissaoDesasossiacao(Long grupoId, Long permissaoId, String rel) {
+	public Link linkToGrupoPermissaoDesassociacao(Long grupoId, Long permissaoId, String rel) {
 		return linkTo(methodOn(GrupoPermissaoController.class).desassociar(grupoId, permissaoId)).withRel(rel);
 	}
 	
-	public Link linkToResponsaveisRestaurante(Long restauranteId, String rel) {
+	public Link linkToRestauranteResponsaveis(Long restauranteId, String rel) {
 		return linkTo(methodOn(RestauranteUsuarioResponsavelController.class)
 				.listar(restauranteId)).withRel(rel);
 	}
 	
-	public Link linkToResponsaveisRestaurante(Long restauranteId) {
-		return linkToResponsaveisRestaurante(restauranteId, IanaLinkRelations.SELF.value());
+	public Link linkToRestauranteResponsaveis(Long restauranteId) {
+		return linkToRestauranteResponsaveis(restauranteId, IanaLinkRelations.SELF.value());
 	}
 	
 	public Link linkToFormaPagamento(Long formaPagamentoId, String rel) {
