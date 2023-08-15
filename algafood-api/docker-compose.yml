@@ -16,12 +16,12 @@ services:
       
   algafood-api:
     image: algafood-api
+    command: ["/wait-for-it.sh", "algafood-mysql:3316", "-t", "480", "--", "java", "-jar", "api.jar"]
     environment:  
       DB_HOST: algafood-mysql
-    ports: 
-      - "8080:8080"
     networks:
       - algafood-network
     depends_on: 
       - algafood-mysql
+      
       
