@@ -8,32 +8,29 @@ import com.algaworks.algafood.api.v1.controller.EstatisticasController.Estatisti
 import com.algaworks.algafood.domain.filter.VendaDiariaFilter;
 import com.algaworks.algafood.domain.model.dto.VendaDiaria;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
-@Api(tags = "Estatísticas")
+//@Api(tags = "Estatísticas")
+@SecurityRequirement(name = "security_auth")
 public interface EstatisticasControllerOpenApi {
 	
-	@ApiOperation(value = "Estatísticas", hidden = true)
+//	@ApiOperation(value = "Estatísticas", hidden = true)
 	EstatisticasModel estatisticas();
 
-	@ApiOperation("Consulta estatísticas de vendas diárias")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "restauranteId", value = "ID do restaurante", 
-				example = "1", dataType = "int"),
-		@ApiImplicitParam(name = "dataCriacaoInicio", value = "Data/hora inicial da criação do pedido", 
-				example = "2019-12-01T00:00:00Z", dataType = "date-time"),
-		@ApiImplicitParam(name = "dataCriacaoFim", value = "Data/hora final da criação do pedido", 
-		example = "2019-12-02T23:59:59Z", dataType = "date-time")
-	})
+//	@ApiOperation("Consulta estatísticas de vendas diárias")
+//	@ApiImplicitParams({
+//		@ApiImplicitParam(name = "restauranteId", value = "ID do restaurante", 
+//				example = "1", dataType = "int"),
+//		@ApiImplicitParam(name = "dataCriacaoInicio", value = "Data/hora inicial da criação do pedido", 
+//				example = "2019-12-01T00:00:00Z", dataType = "date-time"),
+//		@ApiImplicitParam(name = "dataCriacaoFim", value = "Data/hora final da criação do pedido", 
+//		example = "2019-12-02T23:59:59Z", dataType = "date-time")
+//	})
 	List<VendaDiaria> consultarVendasDisarias(
 			VendaDiariaFilter filtro, 
 			
-			@ApiParam(value = "Deslocamento de horário a ser considerado na consulta em relação ao UTC", 
-				defaultValue = "+00:00")
+//			@ApiParam(value = "Deslocamento de horário a ser considerado na consulta em relação ao UTC", 
+//				defaultValue = "+00:00")
 			String timeOffset);
 	
 	ResponseEntity<byte[]> consultarVendasDisariasPdf(VendaDiariaFilter filtro, String timeOffset);
