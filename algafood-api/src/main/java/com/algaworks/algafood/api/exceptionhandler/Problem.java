@@ -6,48 +6,46 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
-//@ApiModel("Problema")
 @JsonInclude(Include.NON_NULL)
 @Getter
 @Builder
+@Schema(name = "Problema")
 public class Problem {
 
-//	@ApiModelProperty(example = "400", position = 1)
+	@Schema(example = "400")
 	private Integer status;
 	
-//	@ApiModelProperty(example = "2022-06-03T23:55:44.0103118Z", position = 5)
-	private OffsetDateTime timestamp;
-	
-//	@ApiModelProperty(example = "http://algafood.bom.br/dados-invalidos", position = 10)
+	@Schema(example = "http://algafod.com.br/dados-invalidos")
 	private String type;
 	
-//	@ApiModelProperty(example = "Dados inválidos", position = 15)
+	@Schema(example = "Dados Inválidos")
 	private String title;
 	
-//	@ApiModelProperty(example = "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.", 
-//			position = 20)
+	@Schema(example = "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente")
 	private String detail;
 	
-//	@ApiModelProperty(example = "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.", 
-//			position = 25)
+	@Schema(example = "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente")
 	private String userMessage;
 	
-//	@ApiModelProperty(value = "Lista de objetos ou campos que geraram o erro (opcional)", 
-//			position = 30)
+	@Schema(example = "2023-09-08T21:01:50.902355498Z")
+	private OffsetDateTime timestamp;
+	
+	@Schema(description = "Lista de objetos ou campos que geraram o erro")
 	private List<Object> objects;
 	
-//	@ApiModel("ObjetoProblema")
 	@Getter
 	@Builder
+	@Schema(name = "ObjetoProblema")
 	public static class Object{
 		
-//		@ApiModelProperty(example = "preço")
+		@Schema(example = "preco")
 		private String name;
 		
-//		@ApiModelProperty(example = "O preço é obrigatório")
+		@Schema(example = "O preço é inválido")
 		private String userMessage;
 	}
 	

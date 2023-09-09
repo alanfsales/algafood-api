@@ -21,10 +21,13 @@ public interface CidadeControllerOpenApi {
 	@Operation(summary = "Lista as cidades")
 	CollectionModel<CidadeModel> listar();
 	
-	@Operation(summary = "Busca uma cidade por ID", responses = {
-			@ApiResponse(responseCode = "200"),
-			@ApiResponse(responseCode = "400", description = "ID da cidade inválido",
-					content = @Content(schema = @Schema))
+	@Operation(summary = "Busca uma cidade por ID", 
+			responses = {
+				@ApiResponse(responseCode = "200"),
+				@ApiResponse(responseCode = "400", description = "ID da cidade inválido",
+						content = @Content(schema = @Schema(ref = "Problema"))),
+				@ApiResponse(responseCode = "404", description = "Cidade não encontrada",
+				content = @Content(schema = @Schema(ref = "Problema")))
 	})
 	CidadeModel buscar(
 			@Parameter(description = "ID de uma cidade", example = "1", required = true)
@@ -36,14 +39,29 @@ public interface CidadeControllerOpenApi {
 			@RequestBody(description = "Representação de uma nova cidade", required = true) 
 			CidadeInput cidadeInput);
 	
-	@Operation(summary = "Atualiza uma cicade por ID")
+	@Operation(summary = "Atualiza uma cicade por ID", 
+			responses = {
+				@ApiResponse(responseCode = "200"),
+				@ApiResponse(responseCode = "400", description = "ID da cidade inválido",
+						content = @Content(schema = @Schema(ref = "Problema"))),
+				@ApiResponse(responseCode = "404", description = "Cidade não encontrada",
+				content = @Content(schema = @Schema(ref = "Problema")))
+	})
 	CidadeModel atualizar(
 			@Parameter(description = "ID de uma cidade", example = "1", required = true)
 			Long cidadeId, 
 			@RequestBody(description = "Representação de uma cidade com dados para atualizar", required = true)
 			CidadeInput cidadeInput);
 	
-	@Operation(summary = "Exclui uma cicade por ID")
+	@Operation(summary = "Exclui uma cicade por ID", 
+			responses = {
+				@ApiResponse(responseCode = "204"),
+				@ApiResponse(responseCode = "400", description = "ID da cidade inválido",
+						content = @Content(schema = @Schema(ref = "Problema"))),
+				@ApiResponse(responseCode = "404", description = "Cidade não encontrada",
+				content = @Content(schema = @Schema(ref = "Problema")))
+			
+	})
 	void remover(
 			@Parameter(description = "ID de uma cidade", example = "1", required = true)
 			Long cidadeId);
