@@ -25,9 +25,9 @@ public interface CidadeControllerOpenApi {
 			responses = {
 				@ApiResponse(responseCode = "200"),
 				@ApiResponse(responseCode = "400", description = "ID da cidade inválido",
-						content = @Content(schema = @Schema(ref = "Problema"))),
+					content = @Content(schema = @Schema(ref = "Problema"))),
 				@ApiResponse(responseCode = "404", description = "Cidade não encontrada",
-				content = @Content(schema = @Schema(ref = "Problema")))
+					content = @Content(schema = @Schema(ref = "Problema")))
 	})
 	CidadeModel buscar(
 			@Parameter(description = "ID de uma cidade", example = "1", required = true)
@@ -43,9 +43,9 @@ public interface CidadeControllerOpenApi {
 			responses = {
 				@ApiResponse(responseCode = "200"),
 				@ApiResponse(responseCode = "400", description = "ID da cidade inválido",
-						content = @Content(schema = @Schema(ref = "Problema"))),
+					content = @Content(schema = @Schema(ref = "Problema"))),
 				@ApiResponse(responseCode = "404", description = "Cidade não encontrada",
-				content = @Content(schema = @Schema(ref = "Problema")))
+					content = @Content(schema = @Schema(ref = "Problema")))
 	})
 	CidadeModel atualizar(
 			@Parameter(description = "ID de uma cidade", example = "1", required = true)
@@ -57,10 +57,9 @@ public interface CidadeControllerOpenApi {
 			responses = {
 				@ApiResponse(responseCode = "204"),
 				@ApiResponse(responseCode = "400", description = "ID da cidade inválido",
-						content = @Content(schema = @Schema(ref = "Problema"))),
+					content = @Content(schema = @Schema(ref = "Problema"))),
 				@ApiResponse(responseCode = "404", description = "Cidade não encontrada",
-				content = @Content(schema = @Schema(ref = "Problema")))
-			
+					content = @Content(schema = @Schema(ref = "Problema")))
 	})
 	void remover(
 			@Parameter(description = "ID de uma cidade", example = "1", required = true)
