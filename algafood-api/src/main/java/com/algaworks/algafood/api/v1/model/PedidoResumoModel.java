@@ -8,6 +8,7 @@ import org.springframework.hateoas.server.core.Relation;
 
 import com.algaworks.algafood.domain.model.StatusPedido;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,22 +17,22 @@ import lombok.Setter;
 @Setter
 public class PedidoResumoModel extends RepresentationModel<PedidoResumoModel> {
 
-//	@ApiModelProperty(example = "f9981ca4-5a5e-4da3-af04-933861df3e55", value = "Código do pedido")
+	@Schema(example = "f9981ca4-5a5e-4da3-af04-933861df3e55")
 	private String codigo;
 	
-//	@ApiModelProperty(example = "298.90", value = "Valor sub total do pedido")
+	@Schema(example = "298.90")
 	private BigDecimal subTotal;
 	
-//	@ApiModelProperty(example = "10.00", value = "Valor do frete do pedido")
+	@Schema(example = "10.00")
 	private BigDecimal taxaFrete;
 	
-//	@ApiModelProperty(example = "308,90", value = "Valor total do pedido")
+	@Schema(example = "308,90")
 	private BigDecimal valorTotal;
 	
-//	@ApiModelProperty(example = "CRIADO", value = "Status do pedido")
+	@Schema(example = "CRIADO")
 	private StatusPedido status;
 	
-//	@ApiModelProperty(example = "2022-06-07T00:50:39Z", value = "Data da criação do pedido")
+	@Schema(example = "2022-06-07T00:50:39Z")
 	private OffsetDateTime dataCriacao;
 	
 	private RestauranteApenasNomeModel restaurante;

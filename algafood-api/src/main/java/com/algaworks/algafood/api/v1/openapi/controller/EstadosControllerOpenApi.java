@@ -5,50 +5,58 @@ import org.springframework.hateoas.CollectionModel;
 import com.algaworks.algafood.api.v1.model.EstadoModel;
 import com.algaworks.algafood.api.v1.model.input.EstadoInput;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
-//@Api(tags = "Estados")
+@Tag(name = "Estados")
 @SecurityRequirement(name = "security_auth")
 public interface EstadosControllerOpenApi {
 
-//	@ApiOperation("Lista os estados")
+	@Operation(summary = "Lista os estados")
 	CollectionModel<EstadoModel> listar();
 	
-//	@ApiOperation("Busca um estado por ID")
-//	@ApiResponses({
-//		@ApiResponse(code = 400, message = "ID inválido", response = Problem.class),
-//		@ApiResponse(code = 404, message = "Estado não encontrado", response = Problem.class)
-//	})
+	@Operation(summary = "Busca um estado por ID", responses = {
+			@ApiResponse(responseCode = "200"),
+			@ApiResponse(responseCode = "400", description = "ID inválido",
+					content = @Content(schema = @Schema(ref = "Problema"))),
+			@ApiResponse(responseCode = "404", description = "Estado não encotrado",
+					content = @Content(schema = @Schema(ref = "Problema"))),
+	})
 	EstadoModel buscar(
-//			@ApiParam(example = "1", value = "ID de um estado", required = true)
+			@Parameter(description = "ID de um estado", example = "1", required = true)
 			Long estadoId);
 	
-//	@ApiOperation("Cadastra um estado")
-//	@ApiResponses({
-//		@ApiResponse(code = 201, message = "Estado cadastrado")
-//	})
+	@Operation(summary = "Cadastra um estado", responses = {
+			@ApiResponse(responseCode = "201", description = "Estado cadastrado")
+	})
 	EstadoModel adicionar(
-//			@ApiParam(name = "corpo", value = "Representação de um novo estado", required = true)
+			@RequestBody(description =  "Representação de um novo estado", required = true)
 			EstadoInput estadoInput);
 	
-//	@ApiOperation("Atualiza um estado por ID")
-//	@ApiResponses({
-//		@ApiResponse(code = 200, message = "Estado atualizado"),
-//		@ApiResponse(code = 404, message = "Estado não encontrado", response = Problem.class)
-//	})
+	@Operation(summary = "Atualiza um estado por ID", responses = {
+			@ApiResponse(responseCode = "200", description = "Estado atualizado"),
+			@ApiResponse(responseCode = "404", description = "Estado não encontrado", 
+				content = @Content(schema = @Schema(ref = "Problema")))
+	})
 	EstadoModel atualizar(
-//			@ApiParam(example = "1", value = "ID de um estado", required = true)
+			@Parameter(description = "ID de um estado", example = "1", required = true)
 			Long estadoId,
 			
-//			@ApiParam(name = "corpo", value = "Representação de um estado com os novos dados", required = true)
+			@RequestBody(description = "Representação de um estado com os novos dados", required = true)
 			EstadoInput estadoInput);
 	
-//	@ApiOperation("Exclui um estado por ID")
-//	@ApiResponses({
-//		@ApiResponse(code = 204, message = "Estado excluído"),
-//		@ApiResponse(code = 404, message = "Estado não encontrado", response = Problem.class)
-//	})
+	@Operation(summary = "Exclui um estado por ID", responses = {
+			@ApiResponse(responseCode = "204", description = "Estado excluído"),
+			@ApiResponse(responseCode = "404", description = "Estado não encontrado",
+					content = @Content(schema = @Schema(ref = "Problema")))
+	})
 	void remover(
-//			@ApiParam(example = "1", value = "ID de um estado", required = true)
+			@Parameter(description = "ID de um estado", example = "1", required = true)
 			Long estadoId);
 }

@@ -5,41 +5,48 @@ import org.springframework.http.ResponseEntity;
 
 import com.algaworks.algafood.api.v1.model.UsuarioModel;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
-//@Api(tags = "Restaurantes")
+@Tag(name = "Restaurantes")
 @SecurityRequirement(name = "security_auth")
 public interface RestauranteUsuarioResponsavelControllerOpenApi {
 
-//	@ApiOperation("Lista os usuários responsáveis associados a restaurante")
-//	@ApiResponses({
-//		@ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class) 
-//	})
+	@Operation(summary = "Lista os usuários responsáveis associados a um restaurante", responses = {
+			@ApiResponse(responseCode = "200"),
+			@ApiResponse(responseCode = "404", description = "Restaurante não encontrado",
+					content = @Content(schema = @Schema(ref = "Problema")))
+	})
 	CollectionModel<UsuarioModel> listar(
-//			@ApiParam(example = "1", value = "ID do restaurante", required = true) 
+			@Parameter(description = "ID do restaurante", example = "1", required = true) 
 			Long restauranteId);
 
-//	@ApiOperation("Associação de restaurante com usuário responsável")
-//	@ApiResponses({ 
-//		@ApiResponse(code = 204, message = "Associaçao realizada com sucesso"),
-//		@ApiResponse(code = 404, message = "Restaurante ou usuário não encontrado", response = Problem.class)
-//	})
+	@Operation(summary = "Associação de restaurante com usuário responsável", responses = {
+			@ApiResponse(responseCode = "204", description = "Associação realizada com sucesso"),
+			@ApiResponse(responseCode = "404", description = "Restaurante ou usuário não encontrado",
+				content = @Content(schema = @Schema(ref = "Problema")))
+	})
 	ResponseEntity<Void> associar(
-//			@ApiParam(example = "1", value = "ID do restaurante", required = true)
+			@Parameter(description = "ID do restaurante", example = "1", required = true)
 			Long restauranteId,
 
-//			@ApiParam(example = "1", value = "ID do usuário", required = true) 
+			@Parameter(example = "1", description = "ID do usuário", required = true) 
 			Long usuarioId);
 
-//	@ApiOperation("Desassociação de restaurante com usuário responsável")
-//	@ApiResponses({ 
-//		@ApiResponse(code = 204, message = "desassociaçao realizada com sucesso"),
-//		@ApiResponse(code = 404, message = "Restaurante ou usuário não encontrado", response = Problem.class)
-//	})
+	@Operation(summary = "Desassociação de restaurante com usuário responsável", responses = {
+			@ApiResponse(responseCode = "204", description = "Desassociação realizada com sucesso"),
+			@ApiResponse(responseCode = "404", description = "Restaurante ou usuário não encontrado",
+				content = @Content(schema = @Schema(ref = "Problema")))
+	})
 	ResponseEntity<Void> deassociar(
-//			@ApiParam(example = "1", value = "ID do restaurante", required = true)
+			@Parameter(description = "ID do restaurante", example = "1", required = true)
 			Long restauranteId,
 
-//			@ApiParam(example = "1", value = "ID do usuário", required = true)
+			@Parameter(example = "1", description = "ID do usuário", required = true) 
 			Long usuarioId);
 }
