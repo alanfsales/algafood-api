@@ -15,8 +15,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
-//@Api(tags = "Produtos")
+@Tag(name = "Produtos")
 @SecurityRequirement(name = "security_auth")
 public interface RestauranteProdutoFotoControllerOpenApi {
 
@@ -35,7 +36,11 @@ public interface RestauranteProdutoFotoControllerOpenApi {
 							schema = @Schema(implementation = FotoProdutoModel.class)),
 					@Content(mediaType = "image/jpeg", schema = @Schema(type = "string", format = "binary")),
 					@Content(mediaType = "image/png", schema = @Schema(type = "string", format = "binary"))
-			})
+			}),
+			@ApiResponse(responseCode = "400", description = "ID do restaurante ou produto inválido", content = {
+					@Content(schema = @Schema(ref = "Problema")) }),
+			@ApiResponse(responseCode = "404", description = "Foto de produto não encontrada", 
+					content = @Content(schema = @Schema(ref = "Problema")) )
 	})
 	FotoProdutoModel buscar(
 			@Parameter(example = "1", description = "ID do restaurante", required = true)
@@ -47,17 +52,18 @@ public interface RestauranteProdutoFotoControllerOpenApi {
 	@Operation(hidden = true)
 	ResponseEntity<?> servir(Long restauranteId, Long produtoId, String acceptHeader)throws HttpMediaTypeNotAcceptableException;
 	
-//	@ApiOperation("Exclui a foto do produto de um restaurante")
-//	 @ApiResponses({
-//	        @ApiResponse(code = 204, message = "Foto do produto excluída"),
-//	        @ApiResponse(code = 400, message = "ID do restaurante ou produto inválido", response = Problem.class),
-//	        @ApiResponse(code = 404, message = "Foto de produto não encontrada", response = Problem.class)
-//	    })
+	@Operation(summary = "Exclui a foto do produto de um restaurante", responses = {
+			 @ApiResponse(responseCode = "204", description = "Foto do produto excluída"),
+		     @ApiResponse(responseCode = "400", description = "ID do restaurante ou produto inválido", 
+		    		 content = @Content(schema = @Schema(ref = "Problema"))),
+		     @ApiResponse(responseCode = "404", description = "Foto de produto não encontrada",
+		    		 content = @Content(schema = @Schema(ref = "Problema")))
+	})
 	void exclui(
-//			@ApiParam(example = "1", value = "ID do restaurante", required = true)
+			@Parameter(example = "1", description = "ID do restaurante", required = true)
 			Long restauranteId,
 			
-//			@ApiParam(example = "1", value = "ID do produto", required = true)
+			@Parameter(example = "1", description = "ID do produto", required = true)
 			Long produtoId);
 
 }
