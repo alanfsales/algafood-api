@@ -72,7 +72,9 @@ public class SpringDocConfig {
 						new Tag().name("Estados").description("Gerencia os Estados"),
 						new Tag().name("Produtos").description("Gerencia os Produtos"),
 						new Tag().name("Usuários").description("Gerencia os Usuários"),
+						new Tag().name("Permissões").description("Gerencia as Permissões"),
 						new Tag().name("Estatísticas").description("Estatísticas da AlgaFood")
+						
 				)).components(new Components()
 						.schemas(gerarSchemas())
 						.responses(gerarResponses())
