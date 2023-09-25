@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Validated
-@ConfigurationProperties("algafood-auth")
+@ConfigurationProperties("algafood.auth")
 public class AlgaFoodSecurityProperties {
 	
 	@NotBlank
