@@ -27,6 +27,7 @@ import io.restassured.http.ContentType;
 @TestPropertySource("/application-test.properties")
 class CadastroCozinhaIT {
 	
+	@SuppressWarnings("deprecation")
 	@LocalServerPort
 	private int port;
 	

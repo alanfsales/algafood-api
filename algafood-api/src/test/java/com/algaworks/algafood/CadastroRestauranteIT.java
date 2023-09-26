@@ -36,6 +36,7 @@ public class CadastroRestauranteIT {
 
 	private static final int RESTAURANTE_ID_INEXISTENTE = 100;
 
+	@SuppressWarnings("deprecation")
 	@LocalServerPort
 	private int port;
 	
