@@ -25,6 +25,7 @@ import com.algaworks.algafood.util.ResourceUtils;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
+@SuppressWarnings("deprecation")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("/application-test.properties")
@@ -36,7 +37,6 @@ public class CadastroRestauranteIT {
 
 	private static final int RESTAURANTE_ID_INEXISTENTE = 100;
 
-	@SuppressWarnings("deprecation")
 	@LocalServerPort
 	private int port;
 	
