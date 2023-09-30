@@ -1,6 +1,8 @@
 package com.algaworks.algafood.api.v1.controller;
 
-import javax.validation.Valid;
+import java.util.Map;
+
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,7 +39,6 @@ import com.algaworks.algafood.domain.model.Usuario;
 import com.algaworks.algafood.domain.repository.PedidoRepository;
 import com.algaworks.algafood.domain.service.EmissaoPedidoService;
 import com.algaworks.algafood.intrastructure.repository.spec.PedidoSpecs;
-import com.google.common.collect.ImmutableMap;
 
 @RestController
 @RequestMapping(path = "/v1/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -106,7 +107,7 @@ public class PedidoController implements PedidoControllerOpenApi {
 	}
 	
 	private Pageable traduzirPageable(Pageable apiPageable) {
-		var mapeamneto = ImmutableMap.of(
+		var mapeamneto = Map.of(
 				"codigo","codigo",
 				"restaurante.nome", "restaurante.nome",
 				"nomeCliente", "cliente.nome",
